@@ -1,0 +1,33 @@
+/* src/index.css */
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 20px;
+  color: #111;
+}
+
+.container {
+  background: #fff;
+  padding: 18px;
+  border-radius: 8px;
+  max-width: 960px;
+  margin: 0 auto 18px auto;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+
+input, textarea {
+  width: 100%;
+  max-width: 720px;
+  padding: 8px;
+  margin: 6px 0;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 8px 12px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+th, td { border: 1px solid #e8e8e8; padding: 8px; text-align: left; }
