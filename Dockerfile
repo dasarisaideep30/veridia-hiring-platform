@@ -1,23 +1,28 @@
-# server/Dockerfile - FINAL FIX FOR SQLITE
+# server/Dockerfile - OPTIMIZED FOR CACHING AND NATIVE MODULES
 
-# 1. Base Image: Use a minimal Node.js image
+# 1. Base Image
 FROM node:20-slim
 
-# 2. Set the working directory inside the container
-WORKDIR /usr/src/app
-
-# 3. Copy ALL files
-COPY . .
-
-# 4. Install dependencies (Crucial Step: Install Build Tools and Recompile)
-# We install tools needed to compile native code (like sqlite3) in the Linux environment.
+# 2. Install Build Tools (CRUCIAL for sqlite3 compilation)
+# This layer installs tools for C++ compilation needed for native modules.
 RUN apt-get update && apt-get install -y build-essential python3
 
-# Now run npm install, which will correctly compile native modules
+# 3. Set the working directory
+WORKDIR /usr/src/app
+
+# --- CACHING LAYER ---
+# 4. Copy ONLY package files (speeds up builds if dependencies haven't changed)
+COPY package*.json ./ 
+
+# 5. Install dependencies (This is only re-run if package.json changes)
 RUN npm install --production
 
-# 5. Expose the port the app runs on
+# --- APPLICATION LAYER ---
+# 6. Copy ALL source code (This is re-run frequently, but npm install uses cache)
+COPY . .
+
+# 7. Expose the port
 EXPOSE 4000
 
-# 6. Define the command to start the application
+# 8. Define the command to start
 CMD ["node", "src/index.js"]
