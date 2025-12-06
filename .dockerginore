@@ -1,0 +1,7 @@
+# .dockerignore
+# Ignore the local dependency folder to prevent bad compilation files from being copied
+node_modules/
+
+# Ignore local generated files
+*.log
+.env

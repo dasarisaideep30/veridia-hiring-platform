@@ -1,7 +1,7 @@
 # server/Dockerfile - FINAL & OPTIMIZED FIX
 
 # 1. Base Image
-FROM node:20-slim
+FROM node:20.12-slim
 
 # 2. Install Build Tools (Necessary for sqlite3 compilation)
 RUN apt-get update && apt-get install -y build-essential python3
